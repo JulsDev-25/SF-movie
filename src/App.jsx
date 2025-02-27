@@ -1,10 +1,13 @@
 import React from 'react';
+import Carte from './components/Carte';
+import "./Style.css"
 
 const App = () => {
   return (
-    <>
-      <p>SF-MOVIE</p>
-    </>
+    <div className='App'>
+      <h1>SF-MOVIE</h1>
+      <Carte />
+    </div>
   );
 }
 
