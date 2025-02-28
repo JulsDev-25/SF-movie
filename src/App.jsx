@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import Carte from './components/Carte';
 import "./Style.css"
-import { Grid2 as Grid, Input } from '@mui/material';
+import { Grid2 as Grid, Input, Button } from '@mui/material';
 import dataInfo from "./assets/data.json"
 
 const App = () => {
-
   const [data, setData] = useState(dataInfo)
   const [word, setWord] = useState("")
 
   useEffect(() => {
     if (word.trim() !== "") {
       const resultSearch = dataInfo.filter(el => 
-        el.locations.toLocaleLowerCase().includes(word.toLowerCase().trim())
+        el.title.toLocaleLowerCase().includes(word.toLowerCase().trim())
       )
       setData(resultSearch)
     }else{
@@ -32,13 +31,13 @@ const App = () => {
           <Grid sx={{ margin: "20px 30px", height: "300px", overflow: "scroll" }}>
             {
               word.trim() && data.map((el, index) => (
-                <p key={index} style={{ margin: "10px 0" }}> {el.locations} </p>
+                <Button key={index} sx={{color: 'black', textTransform: "capitalize", textAlign: "left"}} onClick={() => setWord(el.title.trim())}> {el.title}, {el.locations} </Button>
               ))
             }
           </Grid>
         </Grid>
       </Grid>
-      <Carte moviesmap={data}/>
+      <Carte moviesmap={data} markerUp={[dataInfo[0].lat, dataInfo[0].lng]}/>
     </div>
   );
 }
