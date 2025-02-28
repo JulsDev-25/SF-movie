@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup} from 'react-leaflet';
 import "leaflet/dist/leaflet.css"
-import moviesmap from "../assets/data.json"
 import { Icon } from 'leaflet';
 
-const Carte = () => {
-
-    const [location, setLocation] = useState(moviesmap)
-    console.log(location[0])
+const Carte = ({moviesmap = []}) => {
 
     const customIcon = new Icon({
         iconUrl: "https://cdn-icons-png.flaticon.com/512/9800/9800512.png",
@@ -21,7 +17,7 @@ const Carte = () => {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 {
-                    location.map((e, index) => (
+                    moviesmap.map((e, index) => (
                         <Marker key={index} position={[e.lat, e.lng]} icon={customIcon}>
                             <Popup>
                                 A pretty CSS3 popup. <br /> Easily customizable.
